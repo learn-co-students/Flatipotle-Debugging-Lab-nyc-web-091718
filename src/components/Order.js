@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Side from './Side'
 
 class Order extends Component {
   state = {
@@ -6,7 +7,7 @@ class Order extends Component {
   }
 
   handleClick = () => {
-    this.state.isClicked = !this.state.isClicked
+    this.setState({isClicked: !this.state.isClicked})
   }
 
   render() {
@@ -34,8 +35,6 @@ class Order extends Component {
             :
               <p>No sides</p>
           }
-
-          { /* this is just a shortcut to writing this.state.isClicked ? <Side sides={this.props.sides} /> : null */ }
           { this.state.isClicked && <Side sides={this.props.sides} /> }
 
         </div>
