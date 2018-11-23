@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import './App.css'
-import Form from './Form'
-import Order from './Order'
+import Form from './components/Form'
+import Order from './components/Order'
 
 class App extends Component {
-  state: {
+  state = {
     orders: []
   }
 
@@ -25,12 +25,12 @@ class App extends Component {
           <img src={ require('./images/logo.png') } className="App-logo" alt="logo" />
         </header>
 
-        <Form />
+        <Form addOrder={this.addOrder}/>
 
         <div className="ui raised container segment">
           <h1 className="ui block header">All Orders</h1>
           <div className="ui three cards">
-            { orders }
+            { this.state.orders.map( (order, i) => <Order key={i} protein={order.protein} fillings={order.fillings} toppings={order.toppings} sides={order.sides}/>) }
           </div>
         </div>
       </div>
