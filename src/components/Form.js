@@ -12,34 +12,38 @@ const DEFAULT_STATE = {
 }
 
 class Form extends Component {
-  state = {
-    ...DEFAULT_STATE
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...DEFAULT_STATE
+    }
   }
 
-  handleSubmit() {
+  handleSubmit = (event) => {
     event.preventDefault()
     document.getElementById("order-form").reset()
+    console.log('the props',this.props);
     this.props.addOrder(this.state)
 
     this.setState({
       ...DEFAULT_STATE
-    })
+    }, ()=> console.log('in handleSubmit', this.state))
   }
 
-  handleChange() {
+  handleChange = (event) => {
     const itemType = event.target.name
     const item = event.target.value
 
     !this.state[`${itemType}`].includes(item) ?
       this.setState({
         [itemType]: this.state[`${itemType}`].concat(item)
-      })
+      }, ()=> console.log('in handleChange true',this.state))
     :
       this.setState({
         [itemType]: this.state[`${itemType}`].filter(
           ingr => ingr !== item
         )
-      })
+      }, ()=> console.log('in handleChange false', this.state))
   }
 
   render() {
